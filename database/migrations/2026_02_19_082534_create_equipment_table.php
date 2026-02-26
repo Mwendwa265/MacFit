@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
+            $table->double('name');
             $table->double('value');
             $table->string('status');
-            $table->string('model_no');
+            $table->string('model_no')->unique();
             $table->string('usage', 1000);
             $table->timestamps();
         });

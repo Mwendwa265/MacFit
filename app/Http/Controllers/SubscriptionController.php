@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subscription;
+use App\Models\subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-     public function createSubscription(Request $request){
+    public function createSubscription(Request $request){
         $validated = $request->validate([
-            'user_id'=>'required|string',
-            'bundles_id'=>'required|string'
+            'name'=>'required|string' ,
+            
         ]);
 
-         $subscription = new Subscription();
-         $subscription->user_id = $validated['user_id'];
-         $subscription->bundles_id = $validated['bundles_id '];
-        
+         $subscription = new subscription();
+         $subscription->name = $validated['name'];
+         $subscription->longitude = $validated['longitude'];
+         $subscription->latitude = $validated['latitude'];
+         $subscription->description = $validated['description'];
 
         try{
             $subscription->save();
@@ -60,14 +61,18 @@ class SubscriptionController extends Controller
      }
 
      public function updateSubscription(Request $request,$id){
-         $validated = $request->validate([
-            'user_id'=>'required|string',
-            'bundles_id'=>'required|string'
+          $validated = $request->validate([
+            'name'=>'required|string' ,
+            'description'=>'nullable|string|max:1000' ,
+            'longitude'=>'required|string',
+            'latitude'=>'required|string'
         ]);
         try{
              $existingSubscription=Subscription::findOrfail($id);
-             $existingSubscription->user_id = $validated['user_id'];
-             $existingSubscription->bundles_id = $validated['bundles_id '];
+             $existingSubscription->name = $validated['name'];
+             $existingSubscription->longitude = $validated['longitude'];
+             $existingSubscription->latitude = $validated['latitude'];
+             $existingSubscription ->description = $validated['description'];
              $existingSubscription->save();
             return response()->json($existingSubscription);
         }

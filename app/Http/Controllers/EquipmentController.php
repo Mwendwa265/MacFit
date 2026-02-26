@@ -11,17 +11,17 @@ class EquipmentController extends Controller
         $validated = $request->validate([
             'name'=>'required|string' ,
             'usage'=>'nullable|string|max:1000' ,
-            'model_no'=>'required|string',
-            'value'=>'required|string',
+            'model_no'=>'required|string|unique:equipment,model_no',
+            'value'=>'required|number',
             'status'=>'required|string'
         ]);
 
-         $equipment = new Equipment();
-         $equipment->name = $validated['name'];
-         $equipment->usage = $validated['usage'];
-         $equipment->model_no= $validated['model_no'];
-         $equipment->value = $validated['value'];
-          $equipment->status = $validated['status'];
+        $equipment = new Equipment();
+        $equipment->name = $validated['name'];
+        $equipment->usage = $validated['usage'];
+        $equipment->model_no= $validated['model_no'];
+        $equipment->value = $validated['value'];
+        $equipment->status = $validated['status'];
         
 
         try{
@@ -68,18 +68,25 @@ class EquipmentController extends Controller
      public function updateEquipment(Request $request,$id){
           $validated = $request->validate([
             'name'=>'required|string' ,
-            'description'=>'nullable|string|max:1000' ,
-            'longitude'=>'required|string',
-            'latitude'=>'required|string'
+            'value'=>'nullable|number' ,
+            'status'=>'required|string',
+            'model_no'=>'required|string|unique:equipment,model_no',
+            'usage'=>'required|string|max:1000',
         ]);
-        try{
+
              $existingEquipment=Equipment::findOrfail($id);
              $existingEquipment->name = $validated['name'];
-             $existingEquipment->longitude = $validated['longitude'];
-             $existingEquipment->latitude = $validated['latitude'];
-             $existingEquipment ->description = $validated['description'];
+             $existingEquipment->usage = $validated['usage'];
+             $existingEquipment->model_no= $validated['model_no'];
+             $existingEquipment->value = $validated['value'];
+             $existingEquipment->status = $validated['status'];
              $existingEquipment->save();
-            return response()->json($existingEquipment);
+        try{
+             $existingEquipment->save();
+            return response()->json([
+                'message'=>'Equipment Updated Successfully.'
+            ], 200);
+            
         }
         catch(\Exception $exception){
             return response()->json([

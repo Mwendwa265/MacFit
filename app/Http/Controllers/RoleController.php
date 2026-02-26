@@ -29,11 +29,12 @@ class RoleController extends Controller
             ],500);
         }
 
-    }
+    }    
+        //   read all roles
 
     public function readAllRoles(){
          try{
-            $roles =Role::all();
+            $roles = Role::all();
             return response()->json($roles);
         }
 
@@ -52,14 +53,15 @@ class RoleController extends Controller
         }
         catch(\Exception $exception){
             return response()->json([
-                'error'=>'Failed to fetch Roles.',
+                'error'=>'Failed to fetch Role.',
                 'message'=>$exception->getMessage()
             ],500);
         }
-     }
+     }  
+        //    update role id
 
      public function updateRole(Request $request,$id){
-        $validated=$request->validate([
+        $validated = $request->validate([
             'name'=>'required|string|',
             'description'=>'nulliable|string|max:1000'
 
@@ -73,11 +75,13 @@ class RoleController extends Controller
         }
         catch(\Exception $exception){
             return response()->json([
-                'error'=>'Failed to fetch Roles.',
+                'error'=>'Failed to update Roles.',
                 'message'=>$exception->getMessage()
             ],500);
          }
-     }
+     }   
+
+        //  delete role id
     public function deleteRole($id) {
     try{  
          $role=Role::findOrFail($id);
@@ -87,7 +91,7 @@ class RoleController extends Controller
     }
      catch(\Exception $exception){
             return response()->json([
-                'error'=>'Failed to fetch Roles.',
+                'error'=>'Failed to delete Role.',
                 'message'=>$exception->getMessage()
             ],500);      
     }

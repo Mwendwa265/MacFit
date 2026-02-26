@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->user_id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('bundle_id');
 
-            $table->unsignedBigInteger('bundles_id');
-
-            $table->foreign('bundles_id')->references('id')->on('bundles'); 
+            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('bundle_id')->references('id')->on('bundle');
 
             $table->timestamps();
         });

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subscription extends Model
+class subscription extends Model
 {
-    protected $fillable =[
-        "user_id" ,
-        "bundles_id",
-    ];
+   protected $fillables = [
+        'user_id',
+        'bundle_id',
+   ];
+
+   
 }

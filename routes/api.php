@@ -3,21 +3,32 @@
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\BundleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\GymController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\verifyemailcontroller;
 use Illuminate\Foundation\Console\UpCommand;
 
     // Public Routes
 Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
 
+            // Email Verification
+Route::get('/email/verify/{id}/{hash}', [verifyemailcontroller::class, 'verify'])
+        ->name('verification.verify')
+        ->middleware(['signed', 'throttle:6,1']);
+Route::post('/email/verify/{id}/{hash}', [verifyemailcontroller::class, 'resend'])
+        ->middleware(['signed', 'throttle:6,1']);
 
         // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
-    
+ 
+Route::get('/userInfo', [Authcontroller::class, 'userInfo']); 
+
+Route::post('/logout', [Authcontroller::class, 'logout']);    
 
 
 Route::post('/saveRoles', [RoleController::class, 'createRole']);
@@ -25,6 +36,12 @@ Route::get('/getRoles', [RoleController::class, 'readAllRoles']);
 Route::get('/getRoles/{id}', [RoleController::class, 'readRole']);
 Route::post('/updateRoles/{id}', [RoleController::class, 'updateRole']);
 Route::delete('/deleteRole/{id}', [RoleController::class, 'deleteRole']);
+
+Route::post('/saveEquipment', [EquipmentController::class, 'createEquipment']);
+Route::get('/getEquipments', [EquipmentController::class, 'readAllEquipments']);
+Route::get('/getEquipment/{id}', [EquipmentController::class, 'readEquipment']);
+Route::post('/updateEquipment/{id}', [EquipmentController::class, 'updateEquipment']);
+Route::delete('/deleteEquipment/{id}', [EquipmentController::class, 'deleteEquipment']);
 
 
 Route::post('/savecategory', [CategoryController::class, 'createcategory']);

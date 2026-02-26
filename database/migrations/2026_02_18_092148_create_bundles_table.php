@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bundles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->time('duration');
             $table->dateTime('start_time');
             $table->string('description', 1000);
