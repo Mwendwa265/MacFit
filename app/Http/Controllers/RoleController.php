@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    //    public function _construct(){
+    //     $this->authorizeResource(role::class, 'Role');
+    //    }
+       
          public function createRole(Request $request){
         $validated = $request->validate([
             'name'=>'required|string|' ,

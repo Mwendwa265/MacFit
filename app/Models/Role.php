@@ -10,6 +10,9 @@ class Role extends Model
         "name" ,
         "description"
     ];
-
+     
+    public function user(){
+        $this->hasMany(User::class);
+    }
     
 }
