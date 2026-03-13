@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserOtpController;
 use App\Http\Controllers\verifyemailcontroller;
 use Illuminate\Foundation\Console\UpCommand;
 
     // Public Routes
 Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
-
+Route::post('/verify-otp',[UserOtpController::class, 'verifyOtp']);
             // Email Verification
 Route::get('/email/verify/{id}/{hash}', [verifyemailcontroller::class, 'verify'])
         ->name('verification.verify')

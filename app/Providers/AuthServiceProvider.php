@@ -6,7 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Policies\RolePolicy;
 use App\Policies\userpolicy;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,6 +27,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       $this->registerPolices();
+       $this->registerPolicies();
     }
 }
