@@ -23,12 +23,20 @@ class Authcontroller extends Controller
          'password' => 'required|string|min:4|max:15',
          'user_image' => 'nullable|image|max:255|mimes:jpeg,jpg,png',
          'role_id' =>'required|integer|exists:roles,id',
+         'phoneNumber' =>'nullable|string',
+         'gender' =>'nullable|string',
+         'dateOfBirth' =>'nullable|string',
+         'gymLocation' =>'nullable|string',
 
       ]);
 
       $user = new User();
       $user->name = $validated['name'];
       $user->email = $validated['email'];
+      $user->phoneNumber = $validated['phoneNumber'];
+      $user->gender = $validated['gender'];
+      $user->dateOfBirth = $validated['dateOfBirth'];
+      $user->gymLocation = $validated['gymLocation'];
       $user->role_id = $validated['role_id'];
       $user->is_active = true;  // to delete later
       $user->password = Hash::make($validated['password']);
