@@ -12,6 +12,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserOtpController;
 use App\Http\Controllers\verifyemailcontroller;
 use Illuminate\Foundation\Console\UpCommand;
+use App\Http\Controllers\UserController;
 
     // Public Routes
 Route::post('/register', [Authcontroller::class, 'register']);
@@ -69,4 +70,5 @@ Route::get('/getSubscription/{id}', [SubscriptionController::class, 'readSubscri
 Route::post('/updateSubscription/{id}', [SubscriptionController::class, 'updateSubscription']);
 Route::delete('/deleteSubscription/{id}', [SubscriptionController::class, 'deleteSubscription']);
 
+route::resource('users', UserController::class);
 });
