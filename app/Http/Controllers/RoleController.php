@@ -67,7 +67,7 @@ class RoleController extends Controller
      public function updateRole(Request $request,$id){
         $validated = $request->validate([
             'name'=>'required|string|',
-            'description'=>'nulliable|string|max:1000'
+            'description'=>'nullable|string|max:1000'
 
         ]);
         try{

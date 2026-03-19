@@ -36,13 +36,13 @@ Route::post('/logout', [Authcontroller::class, 'logout']);
 Route::post('/saveRoles', [RoleController::class, 'createRole']);
 Route::get('/getRoles', [RoleController::class, 'readAllRoles']);
 Route::get('/getRoles/{id}', [RoleController::class, 'readRole']);
-Route::post('/updateRoles/{id}', [RoleController::class, 'updateRole']);
+Route::put('/updateRoles/{id}', [RoleController::class, 'updateRole']);
 Route::delete('/deleteRole/{id}', [RoleController::class, 'deleteRole']);
 
 Route::post('/saveEquipment', [EquipmentController::class, 'createEquipment']);
 Route::get('/getEquipments', [EquipmentController::class, 'readAllEquipments']);
 Route::get('/getEquipment/{id}', [EquipmentController::class, 'readEquipment']);
-Route::post('/updateEquipment/{id}', [EquipmentController::class, 'updateEquipment']);
+Route::put('/updateEquipment/{id}', [EquipmentController::class, 'updateEquipment']);
 Route::delete('/deleteEquipment/{id}', [EquipmentController::class, 'deleteEquipment']);
 
 
